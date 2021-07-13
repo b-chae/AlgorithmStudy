@@ -15,24 +15,37 @@ int main(){
     for(int i=0; i<N; i++){
         cin >> x;
         A[i] = -A[i]+x;
-        cout << A[i] << "\t";
+        //cout << A[i] << "\t";
     }
 
     int ans = 0;
 
-    for(int i=0; i<N; i++){
-        if(A[i]==0) continue;
-        ans += abs(A[i]);
-        for(int j=i+1; j<N; j++){
-            if(A[i]*A[j] > 0){
-                A[j]-=A[i];
+    int prev = A[0];
+    for(int i=1; i<N; i++){
+        if(prev>=0){
+            if(A[i]<0){
+                ans += abs(prev);
+            }
+            else if(prev < A[i]){
+                ;
             }
             else{
-                break;
+                ans += abs(prev-A[i]);
             }
+            prev = A[i];
+        }else{
+            if(A[i]>=0){
+                ans += abs(prev);
+            }
+            else if(prev > A[i]){
+            }
+            else{
+                ans += abs(prev-A[i]);
+            }
+            prev = A[i];
         }
     }
-
+    ans += abs(prev);
     cout << ans << "\n";
 
     return 0;
