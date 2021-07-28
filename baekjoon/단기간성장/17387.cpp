@@ -25,37 +25,43 @@ int main()
     int res3 = CCW(x3, y3, x4, y4, x1, y_1);
     int res4 = CCW(x3, y3, x4, y4, x2, y2);
 
-    if (res1 * res2 < 0)
-    {
-        if (res3 * res4 <= 0)
-        {
+    if(res1==0 && res2==0 && res3==0 && res4==0){
+        if(x1>x2){
+            swap(x1, x2);
+            swap(y_1, y2);
+        }
+        if(x3>x4){
+            swap(x3, x4);
+            swap(y3, y4);
+        }
+        if(x1>x3){
+            swap(x1, x3); swap(y_1, y3); swap(x2, x4); swap(y2, y4);
+        }
+
+        if(x1==x2 && x2==x3 &&x3==x4){
+            if(y_1>y2) swap(y_1, y2);
+            if(y3>y4) swap(y3, y4);
+            if(y_1>y3){
+                swap(y_1, y3);
+                swap(y2, y4);
+            }
+            if(y3>=y_1&&y3<=y2){
+                cout << "1\n";
+                return 0;
+            }
+            else{
+                cout << "0\n";
+                return 0;
+            }
+        }
+
+        if(x3>=x1&&x3<=x2){
             cout << "1\n";
             return 0;
         }
     }
-    else if (res1 == 0 && res2 == 0)
-    {
-        if ((x3 >= x1 && x3 <= x2) || (x3 >= x2 && x3 <= x1))
-        {
-            if ((y3 >= y_1 && y3 <= y2) || (y3 >= y2 && y3 <= y_1))
-            {
-                cout << "1\n";
-                return 0;
-            }
-        }
-        if ((x4 >= x1 && x4 <= x2) || (x4 >= x2 && x4 <= x1))
-        {
-            if ((y4 >= y_1 && y4 <= y2) || (y4 >= y2 && y4 <= y_1))
-            {
-                cout << "1\n";
-                return 0;
-            }
-        }
-    }
-    else if (res1 == 0 || res2 == 0)
-    {
-        if (res3 * res4 <= 0)
-        {
+    else{
+        if(res1*res2<=0 && res3*res4<=0){
             cout << "1\n";
             return 0;
         }
